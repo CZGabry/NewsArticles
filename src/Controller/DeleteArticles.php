@@ -11,6 +11,7 @@ class DeleteArticles implements ControllerInterface
 {
     protected $plates;
     protected $articles; 
+    protected $message = "eliminato"; 
 
     public function __construct(Engine $plates, ArticleManager $articleManager)
     {
@@ -24,6 +25,6 @@ class DeleteArticles implements ControllerInterface
         $path = $request->getUri()->getPath();
         $id = substr($path, strpos($path, "=") + 1);
         $this->articles->DeleteArticle($id);
-         echo $this->plates->render('delete', ['userArticles' => $this->articles->getAllArticles()]);
+         echo $this->plates->render('success', ['message' => $this->message]);
     }
 }

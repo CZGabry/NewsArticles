@@ -12,6 +12,7 @@ class SendEdit implements ControllerInterface
 {
     protected $plates;
     protected $articles; 
+    protected $message = "modificato"; 
 
     public function __construct(Engine $plates, ArticleManager $articleManager)
     {
@@ -28,6 +29,6 @@ class SendEdit implements ControllerInterface
       $id = substr($path, strpos($path, "=") + 1);
 
       $this->articles->EditArticle($id, $title, $content);
-      echo $this->plates->render('edit', [ 'userArticles' => $this->articles->getAllArticles()]);
+      echo $this->plates->render('success', ['message' => $this->message]);
     }
 }

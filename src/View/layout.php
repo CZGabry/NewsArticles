@@ -7,6 +7,10 @@
 	<form action="/logout">
     	<input type="submit" value="Logout" />
 	</form>
+	<form action="/">
+    	<input type="submit" value="Home" />
+	</form>
+
     <?=$this->section('content')?>
 </body>
 </html>

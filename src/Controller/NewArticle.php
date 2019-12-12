@@ -25,7 +25,7 @@ class NewArticle implements ControllerInterface
       $title = $_POST['title'];
     	$content = $_POST['content'];
       $userId = $_SESSION['id'];
-      $date = date("Y/m/d");
+      $date = date("Y/m/d/h/i/s");
 
       $this->articles->insertArticles($title, $content, $date, $userId);
       echo $this->plates->render('dashboard', [ 'userArticles' => $this->articles->getAllArticles()]);

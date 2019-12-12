@@ -21,7 +21,17 @@ class ArticleManager
     public function getAllArticles()
     {
 
-		$sql = 'SELECT * FROM Articles;';
+		$sql = 'SELECT * FROM Articles ORDER BY date DESC;';
+		$sth = $this->pdo->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll();
+        
+    }
+
+    public function getAllArticlesByUserId($userId)
+    {
+
+		$sql = 'SELECT * FROM Articles WHERE idUser='.$userId. ' ORDER BY date DESC;';
 		$sth = $this->pdo->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();

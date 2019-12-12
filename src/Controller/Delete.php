@@ -7,6 +7,7 @@ use League\Plates\Engine;
 use Psr\Http\Message\ServerRequestInterface;
 use SimpleMVC\Model\ArticleManager;
 
+session_start();
 
 class Delete implements ControllerInterface
 {
@@ -22,6 +23,8 @@ class Delete implements ControllerInterface
 
     public function execute(ServerRequestInterface $request)
     {
-        echo $this->plates->render('delete', ['userArticles' => $this->articles->getAllArticles()]);
+        $userId = $_SESSION['id'];
+
+        echo $this->plates->render('delete', ['userArticles' => $this->articles->getAllArticlesByUserId($userId)]);
     }
 }

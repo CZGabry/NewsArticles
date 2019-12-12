@@ -6,7 +6,8 @@ namespace SimpleMVC\Controller;
 use League\Plates\Engine;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Error404 implements ControllerInterface
+
+class Logout implements ControllerInterface
 {
     protected $plates;
 
@@ -17,7 +18,9 @@ class Error404 implements ControllerInterface
 
     public function execute(ServerRequestInterface $request)
     {
-        http_response_code(404);
-        echo $this->plates->render('404');
+		session_start(); 
+		session_destroy(); 
+		header("location:/"); 
+		exit();
     }
 }

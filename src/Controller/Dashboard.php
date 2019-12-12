@@ -1,12 +1,12 @@
 <?php
-declare(strict_types=1);
-
 namespace SimpleMVC\Controller;
+
+session_start();
 
 use League\Plates\Engine;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Error404 implements ControllerInterface
+class Dashboard implements ControllerInterface
 {
     protected $plates;
 
@@ -17,7 +17,12 @@ class Error404 implements ControllerInterface
 
     public function execute(ServerRequestInterface $request)
     {
-        http_response_code(404);
-        echo $this->plates->render('404');
+		if(array_key_exists('email', $_SESSION) && $_SESSION['email']){
+			echo $this->plates->render('dashboard');
+
+		}
+		else {
+			echo $this->plates->render('login');
+		}
     }
 }

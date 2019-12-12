@@ -7,7 +7,8 @@ use League\Plates\Engine;
 use Psr\Http\Message\ServerRequestInterface;
 use SimpleMVC\Model\ArticleManager;
 
-class Home implements ControllerInterface
+
+class ArticlePage implements ControllerInterface
 {
     protected $plates;
     protected $articles; 
@@ -21,6 +22,8 @@ class Home implements ControllerInterface
 
     public function execute(ServerRequestInterface $request)
     {
-        echo $this->plates->render('home', [ 'userArticles' => $this->articles->getAllArticles()]);
+        $path = $request->getUri()->getPath();
+        $id = substr($path, strpos($path, "=") + 1);
+        echo $this->plates->render('articlePage', [ 'userArticles' => $this->articles->SingleArticle($id)]);
     }
 }

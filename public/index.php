@@ -21,12 +21,37 @@ $request = ServerRequestFactory::fromGlobals(
 );
 
 // Routing
-$path   = $request->getUri()->getPath();
+$path = $request->getUri()->getPath();
 $method = $request->getMethod();
+
+if(is_numeric(substr($path, strpos($path, "=") + 1))){
+
+	$stringPath = strtok($path,'=');
+
+	$path = $stringPath."=id";
+
+	$murl   = sprintf("%s %s", $method, $path);
+
+	$routes = require 'config/route.php';
+	$controllerName = $routes[$murl] ?? Error404::class;
+
+
+	$controller = $container->get($controllerName);
+	$controller->execute($request);
+
+	exit();
+}
+
+
 $murl   = sprintf("%s %s", $method, $path);
+
 
 $routes = require 'config/route.php';
 $controllerName = $routes[$murl] ?? Error404::class;
 
+
+
 $controller = $container->get($controllerName);
 $controller->execute($request);
+
+

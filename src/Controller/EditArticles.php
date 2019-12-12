@@ -22,7 +22,7 @@ class EditArticles implements ControllerInterface
     public function execute(ServerRequestInterface $request)
     {
         $path = $request->getUri()->getPath();
-        $id = substr($path, strpos($path, "=") + 1);
-        echo $this->plates->render('editArticle', [ 'userArticles' => $this->articles->SingleArticle($id)]);
+        $urlTitle = substr($path, strpos($path, "=") + 1);
+        echo $this->plates->render('editArticle', [ 'userArticles' => $this->articles->SingleArticle($urlTitle)]);
     }
 }

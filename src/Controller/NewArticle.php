@@ -24,10 +24,11 @@ class NewArticle implements ControllerInterface
     {
       $title = $_POST['title'];
     	$content = $_POST['content'];
+      $urlTitle = str_replace(' ', '-', strtolower($title));
       $userId = $_SESSION['id'];
       $date = date("Y/m/d/h/i/s");
 
-      $this->articles->insertArticles($title, $content, $date, $userId);
+      $this->articles->insertArticles($title, $content, $date, $userId, $urlTitle);
       echo $this->plates->render('dashboard', [ 'userArticles' => $this->articles->getAllArticles()]);
     }
 }

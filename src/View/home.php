@@ -11,7 +11,7 @@
 <?php
 
 foreach ($userArticles as $row) {
-	echo "<a href=/article=".$row['id'].">";
+	echo "<a href=/article=".$row['urltitle'].">";
     echo "<div class=col-md-6><h1>".$row['title']."</h1>";
     echo "<p>".$row['content']."</p>";
     echo "<p>".$row['date']."</p>";

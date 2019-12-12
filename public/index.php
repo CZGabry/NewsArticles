@@ -24,11 +24,11 @@ $request = ServerRequestFactory::fromGlobals(
 $path = $request->getUri()->getPath();
 $method = $request->getMethod();
 
-if(is_numeric(substr($path, strpos($path, "=") + 1))){
+if(strpos($path, '=') == true){
 
-	$stringPath = strtok($path,'=');
+	$stringPath = substr($path, strpos($path, '=') + 1);
 
-	$path = $stringPath."=id";
+	$path = str_replace($stringPath,"id",$path);
 
 	$murl   = sprintf("%s %s", $method, $path);
 

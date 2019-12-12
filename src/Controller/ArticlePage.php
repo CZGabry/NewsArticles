@@ -24,7 +24,7 @@ class ArticlePage implements ControllerInterface
     public function execute(ServerRequestInterface $request)
     {
         $path = $request->getUri()->getPath();
-        $id = substr($path, strpos($path, "=") + 1);
-        echo $this->plates->render('articlePage', [ 'userArticles' => $this->articles->SingleArticle($id)]);
+        $titleUrl = substr($path, strpos($path, "=") + 1);
+        echo $this->plates->render('articlePage', [ 'userArticles' => $this->articles->SingleArticle($titleUrl)]);
     }
 }

@@ -23,8 +23,8 @@ class DeleteArticles implements ControllerInterface
     public function execute(ServerRequestInterface $request)
     {
         $path = $request->getUri()->getPath();
-        $id = substr($path, strpos($path, "=") + 1);
-        $this->articles->DeleteArticle($id);
+        $urlTitle = substr($path, strpos($path, "=") + 1);
+        $this->articles->DeleteArticle($urlTitle);
          echo $this->plates->render('success', ['message' => $this->message]);
     }
 }

@@ -23,42 +23,46 @@ class Access implements ControllerInterface
       $email = $_POST['email'];
     	$pass = $_POST['password'];
 
-    	if(strlen($_POST['password']) > 3) {
+      $this->Login($email, $pass);
+    	
+    }
 
-    		if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+    public function Login($email, $pass)
+    {
 
+      if(strlen($pass) > 3) {
 
-				$sql = "SELECT id, email, password FROM Users";
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 
-				foreach ($this->pdo->query($sql) as $row) {
+        $sql = "SELECT id, email, password FROM Users";
 
-					if($email == $row["email"] && $pass == $row["password"]){
-            
-                      $_SESSION['email'] = $email;
-                      $_SESSION['id'] = $row["id"];
+        foreach ($this->pdo->query($sql) as $row) {
 
-
-                      header('location: dashboard');
-                      
-                  	}
-
-                  	else {
-                  		header('location: dashboard');
-                  	}
-				}
+            if($email == $row["email"] && $pass == $row["password"]){
+              
+                        $_SESSION['email'] = $email;
+                        $_SESSION['id'] = $row["id"];
 
 
-    		}
+                        header('location: dashboard');
+                        
+                      }
 
-    		else{
-    			header('location: dashboard');
-    		}
+                      else {
+                        header('location: dashboard');
+                      }
+             }
+        }
+        else{
+          header('location: dashboard');
+        }
 
-    	}
+      }
 
-    	else{
-    		header('location: dashboard');
-    	}
+      else{
+        header('location: dashboard');
+      }
+
 
     }
 }

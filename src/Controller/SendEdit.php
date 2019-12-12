@@ -26,9 +26,9 @@ class SendEdit implements ControllerInterface
       $title = $_POST['title'];
     	$content = $_POST['content'];
       $path = $request->getUri()->getPath();
-      $id = substr($path, strpos($path, "=") + 1);
+      $urlTitle = substr($path, strpos($path, "=") + 1);
 
-      $this->articles->EditArticle($id, $title, $content);
+      $this->articles->EditArticle($urlTitle, $title, $content);
       echo $this->plates->render('success', ['message' => $this->message]);
     }
 }

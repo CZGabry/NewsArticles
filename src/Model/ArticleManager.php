@@ -38,33 +38,33 @@ class ArticleManager
         
     }
 
-    public function insertArticles($title, $content, $date, $userId)
+    public function insertArticles($title, $content, $date, $userId, $urlTitle)
     {
 
-		$sql = "INSERT INTO Articles (title, content, date, idUser) VALUES ('".$title."', '".$content."', '".$date."',".$userId.");";
+		$sql = "INSERT INTO Articles (title, content, date, idUser, urltitle) VALUES ('".$title."', '".$content."', '".$date."',".$userId.", '".$urlTitle."');";
 		$sth = $this->pdo->prepare($sql);
 		$sth->execute();  
 		
     }
 
-    public function SingleArticle($id)
+    public function SingleArticle($titleUrl)
     {
-		$sql = "SELECT * FROM Articles WHERE id=".$id.";";
+		$sql = "SELECT * FROM Articles WHERE urltitle='".$titleUrl."';";
 		$sth = $this->pdo->prepare($sql);
 		$sth->execute(); 
 		return $sth->fetchAll();
     }
 
-    public function DeleteArticle($id)
+    public function DeleteArticle($titleUrl)
     {
-		$sql = "DELETE FROM Articles WHERE id=".$id.";";
+		$sql = "DELETE FROM Articles WHERE urltitle='".$titleUrl."';";
 		$sth = $this->pdo->prepare($sql);
 		$sth->execute(); 
     }
 
-    public function EditArticle($id, $title, $content)
+    public function EditArticle($titleUrl, $title, $content)
     {
-		$sql = "UPDATE Articles SET title = '".$title."', content = '".$content."' WHERE id=".$id.";";
+		$sql = "UPDATE Articles SET title = '".$title."', content = '".$content."' WHERE urltitle='".$titleUrl."';";
 		$sth = $this->pdo->prepare($sql);
 		$sth->execute();
     }

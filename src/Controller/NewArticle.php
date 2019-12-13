@@ -24,7 +24,7 @@ class NewArticle implements ControllerInterface
     {
       $title = $_POST['title'];
     	$content = $_POST['content'];
-      $urlTitle = str_replace(' ', '-', strtolower($title));
+      $urlTitle = urlencode(strtolower($title));
       $userId = $_SESSION['id'];
       $date = date("Y/m/d/h/i/s");
 

@@ -41,8 +41,13 @@ class ArticleManager
     public function insertArticles($title, $content, $date, $userId, $urlTitle)
     {
 
-		$sql = "INSERT INTO Articles (title, content, date, idUser, urltitle) VALUES ('".$title."', '".$content."', '".$date."',".$userId.", '".$urlTitle."');";
+		$sql = "INSERT INTO Articles (title, content, date, idUser, urltitle) VALUES (:title, :content, :date, :userId, :urlTitle);";
 		$sth = $this->pdo->prepare($sql);
+		$sth->bindParam(':title', $title);
+		$sth->bindParam(':content', $content);
+		$sth->bindParam(':date', $date);
+		$sth->bindParam(':userId', $userId);
+		$sth->bindParam(':urlTitle', $urlTitle);
 		$sth->execute();  
 		
     }

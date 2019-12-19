@@ -28,7 +28,9 @@ class NewArticle implements ControllerInterface
       $userId = $_SESSION['id'];
       $date = date("Y/m/d/h/i/s");
 
-      if($title != "" && $content != ""){
+      $tryTitle = str_replace(' ', '', $title);
+      $tryContent = str_replace(' ', '', $content);
+      if($tryTitle != "" && $tryContent != ""){
         $this->articles->insertArticles($title, $content, $date, $userId, $urlTitle);
         echo $this->plates->render('dashboard', [ 'userArticles' => $this->articles->getAllArticles()]);
       }

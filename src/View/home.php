@@ -11,9 +11,13 @@
 <?php
 
 foreach ($userArticles as $row) {
+
+    $content = $row['content'];
+    if (strlen($content) > 50){
+    $content = substr($content, 0, 40).'...';}
 	echo "<a href=/article=".$row['urltitle'].">";
-    echo "<div class=col-md-6><h1>".$row['title']."</h1>";
-    echo "<p>".$row['content']."</p>";
+    echo "<div><h1>".$row['title']."</h1>";
+    echo "<p>".$content."</p>";
     echo "<p>".$row['date']."</p>";
     echo "<p>".$row['idUser']."</p></div></a>";
 }

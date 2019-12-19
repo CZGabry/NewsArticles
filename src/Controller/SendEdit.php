@@ -29,7 +29,9 @@ class SendEdit implements ControllerInterface
       $path = $request->getUri()->getPath();
       $urlTitle = substr($path, strpos($path, "=") + 1);
 
-      if($title != "" && $content != ""){
+      $tryTitle = str_replace(' ', '', $title);
+      $tryContent = str_replace(' ', '', $content);
+      if($tryTitle != "" && $tryContent != ""){
         $this->articles->EditArticle($urlTitle, $title, $content);
         echo $this->plates->render('success', ['message' => $this->successMessage]);
       }

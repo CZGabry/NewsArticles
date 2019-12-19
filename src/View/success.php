@@ -4,7 +4,7 @@
 
 <?php
 
-    echo "<h1>Articolo ".$message." con successo!</h1>"
+    echo "<h1>".$message."</h1>"
 
 ?>
 

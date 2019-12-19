@@ -12,7 +12,8 @@ class SendEdit implements ControllerInterface
 {
     protected $plates;
     protected $articles; 
-    protected $message = "modificato"; 
+    protected $successMessage = "Articolo modificato con successo"; 
+    protected $errorMessage = "Impossibile modificare"; 
 
     public function __construct(Engine $plates, ArticleManager $articleManager)
     {
@@ -28,7 +29,15 @@ class SendEdit implements ControllerInterface
       $path = $request->getUri()->getPath();
       $urlTitle = substr($path, strpos($path, "=") + 1);
 
-      $this->articles->EditArticle($urlTitle, $title, $content);
-      echo $this->plates->render('success', ['message' => $this->message]);
+      if($title != "" && $content != ""){
+        $this->articles->EditArticle($urlTitle, $title, $content);
+        echo $this->plates->render('success', ['message' => $this->successMessage]);
+      }
+
+      else {
+        echo $this->plates->render('success', ['message' => $this->errorMessage]);
+      }
+
+
     }
 }

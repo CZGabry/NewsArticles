@@ -1,7 +1,6 @@
 <?php
 use League\Plates\Engine;
 use Psr\Container\ContainerInterface;
-Use PDO;
 
 return [
     'view_path' => 'src/View',

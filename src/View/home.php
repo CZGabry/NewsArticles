@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Errore 404']) ?>
+<?php $this->layout('layout', ['title' => 'Home SimpleMVC']) ?>
 
 <form action="/dashboard">
     <input type="submit" value="Dashboard" />

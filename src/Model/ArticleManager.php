@@ -31,8 +31,9 @@ class ArticleManager
     public function getAllArticlesByUserId($userId)
     {
 
-		$sql = 'SELECT * FROM Articles WHERE idUser='.$userId. ' ORDER BY date DESC;';
+		$sql = 'SELECT * FROM Articles WHERE idUser=:userId ORDER BY date DESC;';
 		$sth = $this->pdo->prepare($sql);
+		$sth->bindParam(':userId', $userId);
 		$sth->execute();
 		return $sth->fetchAll();
         
@@ -54,23 +55,28 @@ class ArticleManager
 
     public function SingleArticle($titleUrl)
     {
-		$sql = "SELECT * FROM Articles WHERE urltitle='".$titleUrl."';";
+		$sql = "SELECT * FROM Articles WHERE urltitle = :urlTitle;";
 		$sth = $this->pdo->prepare($sql);
+		$sth->bindParam(':urlTitle', $titleUrl);
 		$sth->execute(); 
 		return $sth->fetchAll();
     }
 
     public function DeleteArticle($titleUrl)
     {
-		$sql = "DELETE FROM Articles WHERE urltitle='".$titleUrl."';";
+		$sql = "DELETE FROM Articles WHERE urltitle = :urlTitle;";
 		$sth = $this->pdo->prepare($sql);
+		$sth->bindParam(':urlTitle', $titleUrl);
 		$sth->execute(); 
     }
 
     public function EditArticle($titleUrl, $title, $content)
     {
-		$sql = "UPDATE Articles SET title = '".$title."', content = '".$content."' WHERE urltitle='".$titleUrl."';";
+		$sql = "UPDATE Articles SET title = :title, content = :content WHERE urltitle = :urlTitle;";
 		$sth = $this->pdo->prepare($sql);
+		$sth->bindParam(':title', $title);
+		$sth->bindParam(':content', $content);
+		$sth->bindParam(':urlTitle', $titleUrl);
 		$sth->execute();
     }
 
